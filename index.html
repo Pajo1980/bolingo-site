@@ -185,6 +185,9 @@
   }
   form.wl input::placeholder{color:#8a7c62;}
   .wl-msg{margin-top:18px;font-size:14.5px;color:var(--gold);min-height:20px;font-weight:600;}
+  .wl-consent{display:flex;gap:9px;align-items:flex-start;justify-content:center;max-width:44ch;margin:16px auto 0;text-align:left;font-size:13px;color:#c6b89d;line-height:1.5;cursor:pointer;}
+  .wl-consent input{margin-top:2px;accent-color:var(--gold);flex-shrink:0;}
+  .wl-consent a{color:var(--gold);text-decoration:underline;}
 
   /* ---------- Footer ---------- */
   footer{border-top:1px solid var(--line);padding:56px 0 46px;background:var(--ink-2);}
@@ -392,10 +395,16 @@
         </div>
         <!-- Pour une vraie collecte d'e-mails sans backend : remplacez l'action ci-dessous par un service comme Formspree
              (ex: <form action="https://formspree.io/f/VOTRE_ID" method="POST">). Par défaut, le bouton ouvre l'e-mail. -->
-        <form class="wl" id="wlForm" novalidate>
+        <form class="wl" id="wlForm" action="https://formspree.io/f/xqevgvyp" method="POST" novalidate>
           <input type="email" id="wlEmail" name="email" placeholder="votre@email.com" aria-label="Votre adresse e-mail" required />
+          <input type="hidden" name="_subject" value="Nouvelle inscription — Liste d'attente Android Bolingo" />
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <button class="btn btn-ghost" type="submit">Me prévenir</button>
         </form>
+        <label class="wl-consent" for="wlConsent">
+          <input type="checkbox" id="wlConsent" name="consent" required />
+          <span>J'accepte d'être contacté(e) par e-mail au sujet du lancement Android de Bolingo. Voir la <a href="privacy.html">politique de confidentialité</a>.</span>
+        </label>
         <div class="wl-msg" id="wlMsg" role="status" aria-live="polite"></div>
       </div>
     </div>
@@ -452,17 +461,28 @@
 <script>
   document.getElementById('wlForm').addEventListener('submit', function(e){
     e.preventDefault();
+    var form = e.target;
     var email = document.getElementById('wlEmail').value.trim();
+    var consent = document.getElementById('wlConsent');
     var msg = document.getElementById('wlMsg');
     var ok = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
     if(!ok){ msg.style.color = '#e08a6a'; msg.textContent = "Vérifiez votre adresse e-mail."; return; }
-    // Sans backend : on ouvre l'e-mail pré-rempli vers le contact Bolingo.
-    var subject = encodeURIComponent("Liste d'attente Android — Bolingo");
-    var body = encodeURIComponent("Bonjour, je souhaite être prévenu(e) du lancement de Bolingo sur Android.\n\nMon e-mail : " + email);
-    window.location.href = "mailto:bolingo.app.contact@gmail.com?subject=" + subject + "&body=" + body;
-    msg.style.color = '#e7c25a';
-    msg.textContent = "Merci ! Votre message s'ouvre — envoyez-le et vous serez prévenu(e).";
-    document.getElementById('wlForm').reset();
+    if(!consent.checked){ msg.style.color = '#e08a6a'; msg.textContent = "Merci de cocher la case de consentement."; return; }
+    msg.style.color = '#e7c25a'; msg.textContent = "Envoi en cours…";
+    fetch(form.action, { method:'POST', body:new FormData(form), headers:{'Accept':'application/json'} })
+      .then(function(r){
+        if(r.ok){
+          msg.style.color = '#e7c25a';
+          msg.textContent = "Merci ! Vous serez prévenu(e) dès le lancement Android. 🎉";
+          form.reset();
+        } else {
+          r.json().then(function(d){
+            msg.style.color = '#e08a6a';
+            msg.textContent = (d.errors ? d.errors.map(function(er){return er.message;}).join(', ') : "Une erreur est survenue. Réessayez.");
+          }).catch(function(){ msg.style.color='#e08a6a'; msg.textContent="Une erreur est survenue. Réessayez."; });
+        }
+      })
+      .catch(function(){ msg.style.color='#e08a6a'; msg.textContent="Problème de connexion. Réessayez."; });
   });
 </script>
 </body>
