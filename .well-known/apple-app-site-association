@@ -1,11 +1,16 @@
-   {
-     "applinks": {
-       "apps": [],
-       "details": [
-         {
-           "appID": "8J462HT97T.com.bolingo.app",
-           "paths": ["/u/*", "/p/*"]
-         }
-       ]
-     }
-   }
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "8J462HT97T.com.bolingo.app",
+        "paths": [
+          "/user/*",
+          "/post/*",
+          "/sound/*",
+          "/live-recap/*"
+        ]
+      }
+    ]
+  }
+}
