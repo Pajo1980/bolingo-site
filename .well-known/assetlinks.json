@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.bolingo.app",
+      "sha256_cert_fingerprints": [
+        "DF:48:F1:81:EA:F8:CE:D0:61:BC:87:3C:2F:EF:D3:07:E9:B3:BF:AE:D3:E5:15:DD:5F:6E:B8:93:FA:FA:DB:B7",
+        "BF:56:57:83:B7:57:A3:4E:60:5F:18:20:26:6B:EB:48:CE:43:43:96:39:8D:D2:70:59:61:72:AA:76:02:28:64"
+      ]
+    }
+  }
+]
