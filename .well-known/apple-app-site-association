@@ -1,0 +1,11 @@
+   {
+     "applinks": {
+       "apps": [],
+       "details": [
+         {
+           "appID": "8J462HT97T.com.bolingo.app",
+           "paths": ["/u/*", "/p/*"]
+         }
+       ]
+     }
+   }
