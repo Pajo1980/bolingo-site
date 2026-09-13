@@ -269,6 +269,20 @@
   .feat h3{font-family:"Manrope";font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:11px;}
   .feat p{color:var(--muted);font-size:14.5px;line-height:1.55;margin:0 auto;max-width:26ch;}
 
+  /* ---------- Film de lancement ---------- */
+  .film{padding:6px 0 26px;text-align:center;}
+  .film .sec-head{max-width:640px;margin:0 auto 36px;text-align:center;}
+  .film .sec-head .eyebrow{justify-content:center;}
+  .film-frame{
+    position:relative;width:100%;max-width:900px;margin:0 auto;
+    padding-bottom:56.25%;height:0;
+    border-radius:20px;overflow:hidden;
+    border:1px solid var(--line-strong);background:var(--ink-2);
+    box-shadow:0 24px 60px -28px rgba(0,0,0,.95), 0 0 34px -14px rgba(231,194,90,.55);
+  }
+  .film-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
+  .film-note{margin:18px 0 0;font-size:13.5px;color:var(--muted);letter-spacing:.02em;}  
+  
   /* ---------- Aperçus de l'app ---------- */
   .shots{padding:6px 0 26px;text-align:center;}
   .shots .sec-head{max-width:640px;margin:0 auto 40px;text-align:center;}
@@ -338,6 +352,7 @@
       <span>Bolingo</span>
     </a>
     <nav class="nav-links">
+      <a href="#film">Le film</a>
       <a href="#decouvrir">Découvrir</a>
       <a href="#apercus">Aperçus</a>
       <a href="#fonctionnalites">Fonctionnalités</a>
@@ -375,6 +390,27 @@
     </div>
   </section>
 
+  <div class="sep-star" aria-hidden="true"><span class="sline l"></span><i>✦</i><span class="sline r"></span></div>
+
+  <section class="film" id="film">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Le film</span>
+        <h2>Les Enfants du Soleil.</h2>
+      </div>
+      <div class="film-frame">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/BWpBpUtj5u8?rel=0"
+          title="BOLINGO — Les Enfants du Soleil"
+          loading="lazy"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+      <p class="film-note">Une lumière née du soleil relie l'Afrique à sa diaspora.</p>
+    </div>
+  </section>  
+  
   <div class="sep-star" aria-hidden="true"><span class="sline l"></span><i>✦</i><span class="sline r"></span></div>
 
   <!-- MANIFESTO -->
