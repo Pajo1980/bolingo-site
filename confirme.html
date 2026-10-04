@@ -83,7 +83,7 @@
 <div class="head">
   <div class="head-glow"></div>
   <span class="eyebrow">Congo. Diaspora. Culture. Lumière.</span>
-  <h1>Adresse e-mail confirmée</h1>
+  <h1 id="page-title">Adresse e-mail confirmée</h1>
   <span class="upd">Bienvenue sur Bolingo</span>
 </div>
 
@@ -93,9 +93,10 @@
 
 <main class="wrap">
 
+  <div id="ok">
   <section class="block">
     <h2><span class="num">01</span> Votre compte est activé</h2>
-    <p>Merci, votre adresse e-mail est confirmée. Votre compte <strong>Bolingo - African Diaspora</strong> est maintenant actif : vous pouvez vous connecter et rejoindre la communauté.</p>
+    <p>Merci, votre adresse e-mail est confirmée. Votre compte <strong>Bolingo - African Diaspora</strong> est maintenant actif. Retournez dans l'application Bolingo et connectez-vous avec votre adresse e-mail et votre mot de passe.</p>
     <p style="text-align:center;margin:26px 0 6px">
       <a href="bolingo://" style="display:inline-block;background:#e7c25a;color:#0b0806;font-family:'Manrope',sans-serif;font-weight:800;font-size:16px;text-decoration:none;padding:15px 34px;border-radius:999px">Ouvrir Bolingo</a>
     </p>
@@ -106,6 +107,24 @@
     <p>C'est sans conséquence : votre adresse reste confirmée. Ouvrez simplement Bolingo depuis l'écran d'accueil de votre téléphone, puis connectez-vous avec votre adresse e-mail et votre mot de passe.</p>
     <div class="note">Si vous lisez cette page sur un ordinateur, le bouton ne fonctionnera pas : Bolingo est une application mobile. Prenez votre téléphone et ouvrez l'application, votre compte y est déjà activé.</div>
   </section>
+  </div>
+
+  <div id="expired" hidden>
+  <section class="block">
+    <h2><span class="num">01</span> Ce lien ne fonctionne plus</h2>
+    <p>Ce lien de confirmation a expiré ou a déjà servi. C'est souvent le cas quand plusieurs e-mails ont été demandés : <strong>seul le dernier e-mail reçu fonctionne</strong>, chaque nouvel envoi annule les précédents.</p>
+  </section>
+
+  <section class="block">
+    <h2><span class="num">02</span> Que faire ?</h2>
+    <p><strong>1.</strong> Vous avez déjà touché un lien plus récent ? Votre compte est peut-être déjà activé : ouvrez Bolingo et connectez-vous avec votre adresse e-mail et votre mot de passe.</p>
+    <p><strong>2.</strong> Sinon, ouvrez le <strong>dernier</strong> e-mail reçu de Bolingo (pensez à regarder dans les courriers indésirables) et touchez son lien.</p>
+    <p><strong>3.</strong> Toujours bloqué ? Dans l'application, sur l'écran de connexion, entrez votre adresse e-mail et votre mot de passe, puis touchez « Renvoyer l'e-mail de confirmation ». Attendez une minute entre deux envois.</p>
+    <p style="text-align:center;margin:26px 0 6px">
+      <a href="bolingo://" style="display:inline-block;background:#e7c25a;color:#0b0806;font-family:'Manrope',sans-serif;font-weight:800;font-size:16px;text-decoration:none;padding:15px 34px;border-radius:999px">Ouvrir Bolingo</a>
+    </p>
+  </section>
+  </div>
 
   <section class="block">
     <h2><span class="num">03</span> Besoin d'aide ?</h2>
@@ -131,5 +150,21 @@
       © 2026 Bolingo. Tous droits réservés.
     </div>
 </footer>
+<script>
+(function () {
+  var hash = new URLSearchParams((location.hash || '').replace(/^#/, ''));
+  var query = new URLSearchParams(location.search || '');
+  var err = hash.get('error') || query.get('error') || hash.get('error_code') || query.get('error_code');
+  if (err) {
+    document.getElementById('ok').hidden = true;
+    document.getElementById('expired').hidden = false;
+    document.getElementById('page-title').textContent = 'Lien expiré ou déjà utilisé';
+    document.title = 'Bolingo — Lien expiré ou déjà utilisé';
+  }
+  if (location.hash || location.search) {
+    try { history.replaceState(null, '', location.pathname); } catch (e) {}
+  }
+})();
+</script>
 </body>
 </html>
