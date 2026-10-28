@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bolingo — Contenu réservé à l'application</title>
+<meta name="description" content="Installe l'application Bolingo pour découvrir ce contenu : le réseau social de la diaspora africaine.">
+<meta property="og:site_name" content="Bolingo">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ce contenu est sur Bolingo">
+<meta property="og:description" content="Installe l'application Bolingo pour découvrir ce contenu : le réseau social de la diaspora africaine.">
+<meta property="og:url" content="https://www.bolingodiaspora.com/">
+<meta property="og:image" content="https://www.bolingodiaspora.com/bolingo-partage.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ce contenu est sur Bolingo">
+<meta name="twitter:description" content="Installe l'application Bolingo pour découvrir ce contenu : le réseau social de la diaspora africaine.">
+<meta name="twitter:image" content="https://www.bolingodiaspora.com/bolingo-partage.jpg">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
@@ -23,6 +36,8 @@
     background:#E8305A; color:#FFFFFF;
   }
   a.btn.alt { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.18); }
+  a.btn.open { background:#D4A853; color:#1A0808; }
+  a.btn[hidden] { display:none; }
   .home { font-size:13px; color:rgba(255,255,255,0.4); text-decoration:none; }
   .home:hover { color:#D4A853; }
 </style>
@@ -31,12 +46,25 @@
   <div class="card">
     <img src="/bolingo-logo.png" alt="Bolingo" class="logo">
     <h1>Ce contenu est sur Bolingo</h1>
-    <p>Pour découvrir ce profil ou cette publication, installez l'application Bolingo — le réseau social de la diaspora africaine.</p>
+    <p>Pour découvrir ce profil, cette publication ou ce direct, ouvre l'application Bolingo, ou installe-la : le réseau social de la diaspora africaine.</p>
     <div class="btns">
+      <a class="btn open" id="open-app" href="#" hidden>Ouvrir dans l'application</a>
       <a class="btn" href="https://apps.apple.com/app/id6764163338">Télécharger sur l'App Store</a>
       <a class="btn alt" href="https://play.google.com/store/apps/details?id=com.bolingo.app">Télécharger sur Google Play</a>
     </div>
     <a class="home" href="/">Retour à l'accueil</a>
   </div>
+  <script>
+    // Bouton « Ouvrir dans l'application » : seulement pour les pages que l'app
+    // sait ouvrir. Pas de redirection automatique (elle afficherait une erreur
+    // à ceux qui n'ont pas l'app) : la personne touche le bouton elle-même.
+    (function () {
+      var m = location.pathname.match(/^\/(user|post|sound|live-recap)\/([A-Za-z0-9_-]+)\/?$/);
+      if (!m) return;
+      var b = document.getElementById('open-app');
+      b.href = 'bolingo://' + m[1] + '/' + m[2];
+      b.hidden = false;
+    })();
+  </script>
 </body>
 </html>
