@@ -1,0 +1,28 @@
+# Site statique : aucune commande de build, la racine du dépôt est publiée telle quelle.
+[build]
+  publish = "."
+
+# iOS lit ce fichier sans extension : il doit être servi en JSON.
+# Aucune redirection ni réécriture sur /.well-known/*.
+[[headers]]
+  for = "/.well-known/apple-app-site-association"
+  [headers.values]
+    Content-Type = "application/json"
+
+# Aperçu des liens partagés (titre + image du contenu) pour WhatsApp, Snapchat, etc.
+# Seulement ces quatre chemins ; tout le reste est servi comme avant.
+[[edge_functions]]
+  path = "/post/*"
+  function = "share-preview"
+
+[[edge_functions]]
+  path = "/live-recap/*"
+  function = "share-preview"
+
+[[edge_functions]]
+  path = "/user/*"
+  function = "share-preview"
+
+[[edge_functions]]
+  path = "/sound/*"
+  function = "share-preview"
